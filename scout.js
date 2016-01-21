@@ -28,6 +28,7 @@ Scout.prototype.discover = function(constructor) {
   });
   return machine;
 };
+Scout.prototype.addToRegistry = Scout.prototype.discover;
 
 Scout.prototype.provision = function(deviceObject, constructor) {
 
@@ -48,10 +49,10 @@ Scout.prototype.provision = function(deviceObject, constructor) {
   this.server._jsDevices[machine.id] = machine;
 
   this.server.registry.save(machine, function(err){
-
   });
 
   this.server._log.emit('log','scout', 'Device (' + machine.type + ') ' + machine.id + ' was provisioned from registry.' );
   this.server.emit('deviceready', machine);
   return machine;
 };
+Scout.prototype.getFromRegistry = Scout.prototype.provision;
