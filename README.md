@@ -45,29 +45,31 @@ MyScout.prototype.init = function(next) {
 ```
 
 ##### Method: Scout#discover(constructor, [arguments])
+**Deprecated: use `Scout#addToRegistry(constructor, [arguments])` instead.**
+
+##### Method: Scout#addToRegistry(constructor, [arguments])
 
 * `constructor` Subclass of Device
 * `arguments` List of Objects
 
-This method is called by you when you've found your device. The `constructor` argument should be a subclass of `Device`, and the second argument is a
-list of objects to be used by the constructor.
+This method is called by you when you're ready to initialize your device and add it to the registry. The `constructor` argument should be a subclass of `Device`, and the second argument is a list of objects to be used by the constructor.
 
 ```js
 MyScout.prototype.init = function(next) {
-  this.discover(MyDevice, foo, bar, 'baz');
+  this.addToRegistry(MyDevice, foo, bar, 'baz');
 };
 
 ```
 
-
-
 ##### Method: Scout#provision(deviceObject, constructor)
+**Deprecated: use `Scout#getFromRegistry(deviceObject, constructor)` instead.**
+
+##### Method: Scout#getFromRegistry(deviceObject, constructor)
 
 * `deviceObject` Object
 * `constructor` Subclass of Device
 
-Zetta will persist device data to an internal registry. Using an object retrieved from this registry you can initialize a device that Zetta already
-knows about. The first argument `deviceObject` is just data on the object from Zetta. The `constructor` argument is what will be created by Zetta.
+Zetta will persist device data to an internal registry. Using an object retrieved from this registry you can initialize a device that Zetta already knows about. The first argument `deviceObject` is just data on the object from Zetta. The `constructor` argument is what will be created by Zetta.
 
 ```js
 MyScout.prototype.init = function(next) {
@@ -76,7 +78,7 @@ MyScout.prototype.init = function(next) {
     id: '123',
     foo: 'bar'
   };
-  this.provision(deviceObject, MyDevice);
+  this.getFromRegistry(deviceObject, MyDevice);
 };
 ```
 
@@ -94,10 +96,10 @@ MyScout.prototype.init = function(next) {
   this.server.find(query, function(err, results) {
     if (results.length > 0) {
       // found in registry, tell zetta it came online
-      self.provision(results[0], MyDevice, foo, bar, 'baz');
+      self.getFromRegistry(results[0], MyDevice, foo, bar, 'baz');
     } else {
-      // does not exist in registry, discover a new one.
-      self.discover(MyDevice, foo, bar, 'baz');
+      // does not exist in registry, add the device to the registry
+      self.addToRegistry(MyDevice, foo, bar, 'baz');
     }
   });
 };
