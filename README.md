@@ -45,7 +45,7 @@ MyScout.prototype.init = function(next) {
 ```
 
 ##### Method: Scout#discover(constructor, [arguments])
-**Deprecated: use `Scout#addToRegistry(constructor, [arguments])` instead.**
+Deprecated: use `Scout#addToRegistry(constructor, [arguments])` instead.
 
 ##### Method: Scout#addToRegistry(constructor, [arguments])
 
@@ -62,7 +62,7 @@ MyScout.prototype.init = function(next) {
 ```
 
 ##### Method: Scout#provision(deviceObject, constructor)
-**Deprecated: use `Scout#getFromRegistry(deviceObject, constructor)` instead.**
+Deprecated: use `Scout#getFromRegistry(deviceObject, constructor)` instead.
 
 ##### Method: Scout#getFromRegistry(deviceObject, constructor)
 
