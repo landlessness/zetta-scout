@@ -15,7 +15,7 @@ Scout.prototype.createDevice = function(args) {
 };
 
 // add a new device to the registry
-Scout.prototype.discover = function(constructor) {
+Scout.prototype.addToRegistry = function(constructor) {
   var self = this;
   var machine = this.createDevice(arguments);  
   machine = Scientist.init(machine);
@@ -28,9 +28,9 @@ Scout.prototype.discover = function(constructor) {
   });
   return machine;
 };
-Scout.prototype.addToRegistry = Scout.prototype.discover;
+Scout.prototype.discover = util.deprecate(Scout.prototype.addToRegistry, '`discover` is deprecated, please use `addToRegistry`');
 
-Scout.prototype.provision = function(deviceObject, constructor) {
+Scout.prototype.getFromRegistry = function(deviceObject, constructor) {
 
   // if already initiated on runtime do not create a second instnace
   if(this.server._jsDevices[deviceObject.id]) {
@@ -55,4 +55,4 @@ Scout.prototype.provision = function(deviceObject, constructor) {
   this.server.emit('deviceready', machine);
   return machine;
 };
-Scout.prototype.getFromRegistry = Scout.prototype.provision;
+Scout.prototype.provision = util.deprecate(Scout.prototype.getFromRegistry, '`provision` is deprecated, please use `getFromRegistry`');
